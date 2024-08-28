@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
-<!-- Using the placeholder set on base.html-->
 {% block content %}
     <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
+    {% for post in posts %} <!--Loop through posts. Jinja syntax --> 
+        <a href="#">a
+            <h2>{{ post['title'] }}</h2>
+        </a>
+        <span class="badge badge-primary">{{ post['created'] }}</span>
+        <hr>
+    {% endfor %}
 {% endblock %}

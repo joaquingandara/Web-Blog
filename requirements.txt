@@ -2,7 +2,9 @@ python3 -m venv venvWebBlog
 source venv/bin/activate
 
 pip install flask
-
 export FLASK_APP=hello #Tell flask where to find app
 export FLASK_ENV=development #run app in dev mode
 flask run
+
+sudo apt install sqlite3
+python init_db.py
