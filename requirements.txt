@@ -1,4 +1,5 @@
 python3 -m venv venvWebBlog
+source venv/bin/activate
 
 pip install flask
 
