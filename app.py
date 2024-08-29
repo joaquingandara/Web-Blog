@@ -24,7 +24,6 @@ def get_post(post_id):
 app = Flask(__name__) #Create app instance
 app.config['SECRET_KEY'] = secrets.token_bytes(16)  
 
-
 #'@' works as python decorator to wrapped function. 
 # In particular the decorator turns a function into a flask view function.
 # This function will respond to / requests via http
@@ -95,3 +94,13 @@ def delete(id):
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    if request.method == 'POST': #handle the incoming POST request 
+        name = request.form['name']
+        email = request.form['email']
+        textbox = request.form['textbox']
+        #action to be performed with the contact form.
+        return redirect(url_for('index'))
+    return render_template('contact.html')
