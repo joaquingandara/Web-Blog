@@ -1,6 +1,11 @@
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
+import secrets
+#The global request object to access incoming request data that will be submitted via an HTML form.
+#The url_for() function to generate URLs.
+#The flash() function to flash a message when a request is processed.
+#The redirect() function to redirect the client to a different location.
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -17,6 +22,8 @@ def get_post(post_id):
     return post
 
 app = Flask(__name__) #Create app instance
+app.config['SECRET_KEY'] = secrets.token_bytes(16)  
+
 
 #'@' works as python decorator to wrapped function. 
 # In particular the decorator turns a function into a flask view function.
@@ -34,3 +41,8 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     return render_template('post.html', post=post)
+
+#get y post. So, user can access form and send data.
+@app.route('/create', methods=('GET', 'POST'))
+def create():
+    return render_template('create.html')
